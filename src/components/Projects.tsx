@@ -4,11 +4,30 @@ interface Project {
   title: string;
   description: string;
   tags: string[];
-  status: "Planned" | "Underway";
+  status: "Planned" | "Underway" | "Completed";
+  githubLink?: string;
 }
 
-export default function Projects() {
+interface ProjectsProps {
+  onViewHostProject: () => void;
+}
+
+export default function Projects({ onViewHostProject }: ProjectsProps) {
   const projects: Project[] = [
+    {
+      title: "Host-Based Network Reconnaissance & Service Enumeration",
+      status: "Completed",
+      description:
+        "A practical host-based reconnaissance lab where Nmap is used to discover live hosts, identify open ports, enumerate running services, and perform OS fingerprinting within a controlled cybersecurity environment.",
+      tags: [
+        "Kali Linux",
+        "Nmap",
+        "TCP SYN Scan",
+        "Service Enumeration",
+        "OS Detection",
+      ],
+      githubLink: "https://github.com/Lokesh-2403/self-host-network-recon",
+    },
     {
       title: "Endpoint Security Monitoring",
       status: "Underway",
@@ -21,19 +40,15 @@ export default function Projects() {
         "Syslog",
         "Process Monitoring",
       ],
+      githubLink: "https://github.com/Lokesh-2403/endpoint-security",
     },
     {
       title: "Linux SSH Brute Force Detection System",
       status: "Planned",
       description:
         "Detect and analyze SSH brute-force attempts on a Linux server by monitoring authentication logs and extracting suspicious IP activity patterns.",
-      tags: [
-        "Kali Linux",
-        "Bash",
-        "Python",
-        "Regex",
-        "Linux Auth Logs",
-      ],
+      tags: ["Kali Linux", "Bash", "Python", "Regex", "Linux Auth Logs"],
+      githubLink: "https://github.com/Lokesh-2403/ssh-brute-force",
     },
     {
       title: "Windows Failed Login Investigation Tool",
@@ -46,20 +61,35 @@ export default function Projects() {
         "Event Viewer",
         "Security Event Logs (4625)",
       ],
-    },
-    {
-      title: "Network Port Scan Detection",
-      status: "Planned",
-      description:
-        "Detect port scanning behavior by analyzing abnormal connection attempts and suspicious traffic patterns.",
-      tags: [
-        "Kali Linux",
-        "Nmap",
-        "Linux Target",
-        "Manual Log Analysis",
-      ],
+      githubLink: "https://github.com/Lokesh-2403/windows-login",
     },
   ];
+
+  const getStatusClasses = (status: string) => {
+    switch (status) {
+      case "Completed":
+        return "bg-green-500/10 text-green-400 border border-green-500/30 shadow-md shadow-green-500/20";
+      case "Underway":
+        return "bg-blue-500/10 text-blue-400 border border-blue-500/30 shadow-md shadow-blue-500/20";
+      case "Planned":
+        return "bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 shadow-md shadow-yellow-500/20";
+      default:
+        return "";
+    }
+  };
+
+  const getDotClasses = (status: string) => {
+    switch (status) {
+      case "Completed":
+        return "bg-green-400";
+      case "Underway":
+        return "bg-blue-400 animate-pulse";
+      case "Planned":
+        return "bg-yellow-400";
+      default:
+        return "";
+    }
+  };
 
   return (
     <section id="projects" className="py-24">
@@ -68,7 +98,6 @@ export default function Projects() {
           <h2 className="text-4xl lg:text-5xl font-bold text-text-primary font-poppins mb-4 tracking-tight">
             Security Projects
           </h2>
-
           <p className="text-gray-400 text-center mt-4 max-w-2xl mx-auto">
             All projects are built in a controlled lab environment for defensive security learning purposes.
           </p>
@@ -85,18 +114,14 @@ export default function Projects() {
               </h3>
 
               <span
-                className={`inline-flex items-center gap-2 mb-4 px-4 py-1.5 text-xs font-semibold tracking-wide uppercase rounded-full transition-all duration-300 ${
-                  project.status === "Underway"
-                    ? "bg-blue-500/10 text-blue-400 border border-blue-400/30 shadow-md shadow-blue-500/20"
-                    : "bg-yellow-500/10 text-yellow-400 border border-yellow-400/30 shadow-md shadow-yellow-500/20"
-                }`}
+                className={`inline-flex items-center gap-2 mb-4 px-4 py-1.5 text-xs font-semibold tracking-wide uppercase rounded-full ${getStatusClasses(
+                  project.status
+                )}`}
               >
                 <span
-                  className={`w-2 h-2 rounded-full ${
-                    project.status === "Underway"
-                      ? "bg-blue-400 animate-pulse"
-                      : "bg-yellow-400"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${getDotClasses(
+                    project.status
+                  )}`}
                 ></span>
                 {project.status}
               </span>
@@ -117,32 +142,41 @@ export default function Projects() {
               </div>
 
               <div className="flex gap-4">
-                <button className="flex items-center gap-2 px-4 py-2 bg-accent-cyan/10 text-accent-cyan rounded-lg border border-accent-cyan/20 hover:bg-accent-cyan hover:text-primary-bg transition-all duration-300">
-                  <ExternalLink className="w-4 h-4" />
-                  <span className="text-sm font-medium">View Details</span>
-                </button>
+                {/* 🔥 Special logic for first project */}
+                {index === 0 ? (
+                  <button
+                    onClick={onViewHostProject}
+                    className="flex items-center gap-2 px-4 py-2 bg-accent-cyan/10 text-accent-cyan rounded-lg border border-accent-cyan/20 hover:bg-accent-cyan hover:text-primary-bg transition-all duration-300"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span className="text-sm font-medium">
+                      View Details
+                    </span>
+                  </button>
+                ) : (
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 bg-accent-cyan/10 text-accent-cyan rounded-lg border border-accent-cyan/20 opacity-50 cursor-not-allowed"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span className="text-sm font-medium">
+                      View Details
+                    </span>
+                  </button>
+                )}
 
-                <button className="flex items-center gap-2 px-4 py-2 bg-transparent text-text-secondary rounded-lg border border-white/10 hover:border-accent-cyan hover:text-accent-cyan transition-all duration-300">
+                {/* GitHub */}
+                <a
+                  href={project.githubLink || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-transparent text-text-secondary rounded-lg border border-white/10 hover:border-accent-cyan hover:text-accent-cyan transition-all duration-300"
+                >
                   <Github className="w-4 h-4" />
                   <span className="text-sm font-medium">GitHub</span>
-                </button>
+                </a>
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <p className="text-text-secondary text-sm">
-            More projects and documentation available on{" "}
-            <a
-              href="https://github.com/Lokesh-2403"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent-cyan hover:underline font-medium"
-            >
-              GitHub
-            </a>
-          </p>
         </div>
       </div>
     </section>

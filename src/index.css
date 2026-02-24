@@ -1,18 +1,37 @@
+/* 1. Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 2. Custom base styles */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-
   body {
     @apply bg-primary-bg text-text-primary;
     font-family: 'Inter', sans-serif;
   }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
+  }
+}
+
+/* 3. Custom status colors */
+@layer utilities {
+  /* Status text colors */
+  .status-completed {
+    @apply text-green-600 font-semibold; /* green text for completed */
+  }
+  .status-planned {
+    @apply text-yellow-500 font-semibold; /* yellow text for planned */
+  }
+
+  /* Optional: status badges with background */
+  .badge-completed {
+    @apply bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm;
+  }
+  .badge-planned {
+    @apply bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-sm;
   }
 }

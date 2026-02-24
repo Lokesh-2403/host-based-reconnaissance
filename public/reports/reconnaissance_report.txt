@@ -1,0 +1,25 @@
+# Nmap Scan Report
+# Scan Type: TCP SYN Scan + Service Version Detection + OS Detection
+# Target: 192.168.xx.xx
+
+Nmap scan report for 192.168.xx.xx
+Host is up (latency detected).
+
+Not shown: 65534 filtered tcp ports (no-response)
+
+PORT     STATE SERVICE VERSION
+8080/tcp open  http    SimpleHTTPServer 0.6 (Python 3.x)
+
+Device type: General Purpose System
+Running: Linux 5.x | 6.x
+OS details: Linux Kernel 5.x – 6.x
+Network Distance: 0 hops
+
+------------------------------------------------------------
+Summary:
+- Host is active and reachable.
+- Only port 8080 is exposed.
+- HTTP service identified as Python SimpleHTTPServer.
+- OS fingerprinting indicates a Linux-based system.
+- No additional open ports detected during full TCP scan.
+------------------------------------------------------------
