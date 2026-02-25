@@ -291,7 +291,7 @@ export default function WindowsEventLogProject() {
               Full SOC-style incident report documenting all 5 Event ID findings, raw event properties, threat assessments, and remediation recommendations.
             </p>
             <a
-              href="YOUR_GOOGLE_DRIVE_PDF_LINK_HERE"
+              href="https://drive.google.com/file/d/1-uO-Uc4pGDrjpx_uc3o4LnJs7EBKU2E4/view"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-black transition-all duration-300 hover:opacity-90 hover:scale-105"
