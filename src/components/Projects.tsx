@@ -30,6 +30,20 @@ export default function Projects({ onViewHostProject, onViewWindowsProject }: Pr
       githubLink: "https://github.com/Lokesh-2403/host-based-reconnaissance",
     },
     {
+      title: "Windows Security Event Log Analysis & Threat Detection",
+      status: "Completed",
+      description:
+        "Investigated 881 security events across 5 critical Event IDs on a Windows lab machine. Detected failed login attempts, analyzed service logon activity, and monitored process creation events. Findings documented in a professional SOC-style incident report.",
+      tags: [
+        "Windows Event Viewer",
+        "Log Analysis",
+        "Threat Detection",
+        "SOC Operations",
+        "Incident Reporting",
+      ],
+      githubLink: "https://github.com/Lokesh-2403/windows-login",
+    },
+    {
       title: "Endpoint Security Monitoring",
       status: "Underway",
       description:
@@ -50,20 +64,6 @@ export default function Projects({ onViewHostProject, onViewWindowsProject }: Pr
         "Detect and analyze SSH brute-force attempts on a Linux server by monitoring authentication logs and extracting suspicious IP activity patterns.",
       tags: ["Kali Linux", "Bash", "Python", "Regex", "Linux Auth Logs"],
       githubLink: "https://github.com/Lokesh-2403/ssh-brute-force",
-    },
-    {
-      title: "Windows Security Event Log Analysis & Threat Detection",
-      status: "Completed",
-      description:
-        "Investigated 881 security events across 5 critical Event IDs on a Windows lab machine. Detected failed login attempts, analyzed service logon activity, and monitored process creation events. Findings documented in a professional SOC-style incident report.",
-      tags: [
-        "Windows Event Viewer",
-        "Log Analysis",
-        "Threat Detection",
-        "SOC Operations",
-        "Incident Reporting",
-      ],
-      githubLink: "https://github.com/Lokesh-2403/windows-login",
     },
   ];
 
@@ -152,7 +152,7 @@ export default function Projects({ onViewHostProject, onViewWindowsProject }: Pr
                     <ExternalLink className="w-4 h-4" />
                     <span className="text-sm font-medium">View Details</span>
                   </button>
-                ) : index === 3 ? (
+                ) : index === 1 ? (
                   <button
                     onClick={onViewWindowsProject}
                     className="flex items-center gap-2 px-4 py-2 bg-accent-cyan/10 text-accent-cyan rounded-lg border border-accent-cyan/20 hover:bg-accent-cyan hover:text-primary-bg transition-all duration-300"
