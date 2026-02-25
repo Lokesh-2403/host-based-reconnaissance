@@ -11,7 +11,6 @@ const screenshots = [
     severityColor: "text-orange-400",
     description:
       "4 failed login attempts detected within an 11-second window (15:45:04 to 15:45:15). This rapid succession pattern is consistent with a brute-force attack where an attacker cycles through passwords to gain unauthorized system access. Each failed attempt was logged by Microsoft Windows Security Auditing under the Logon task category.",
-    // placeholder — user will replace with actual image path
     img: "/screenshots/02-failed-login-4625.png",
   },
   {
@@ -94,29 +93,14 @@ export default function WindowsEventLogProject() {
     <div
       className="min-h-screen text-white"
       style={{
-        background: "linear-gradient(135deg, #020812 0%, #040f1a 40%, #020c14 70%, #010810 100%)",
+        background: "linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%)",
         fontFamily: "'Inter', sans-serif",
       }}
     >
-      {/* Grid overlay */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-
-      {/* Glow orbs */}
-      <div className="fixed top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,255,255,0.06) 0%, transparent 70%)" }} />
-      <div className="fixed bottom-1/4 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,100,255,0.05) 0%, transparent 70%)" }} />
-
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-16">
 
         {/* ── HERO HEADING ── */}
         <div className="text-center mb-16">
-          {/* Tag */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             SOC Lab Project · TLP: WHITE
@@ -142,7 +126,6 @@ export default function WindowsEventLogProject() {
             Investigated <span className="text-cyan-400 font-semibold">881 security events</span> across 5 critical Event IDs — identifying failed login attempts, service logon activity, and process creation events. Documented findings in a professional SOC-style incident report with threat assessment and remediation recommendations.
           </p>
 
-          {/* Tags */}
           <div className="flex flex-wrap justify-center gap-2 mt-6">
             {["Windows Event Viewer", "Log Analysis", "Threat Detection", "SOC Operations", "Incident Reporting", "SIEM Fundamentals"].map((t) => (
               <span key={t} className="px-3 py-1 text-xs rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-300">
@@ -178,7 +161,6 @@ export default function WindowsEventLogProject() {
             className="rounded-2xl border border-white/10 overflow-hidden"
             style={{ background: "rgba(255,255,255,0.02)" }}
           >
-            {/* Screenshot display */}
             <div className="relative bg-black/40 aspect-video flex items-center justify-center overflow-hidden">
               <img
                 key={current}
@@ -187,7 +169,6 @@ export default function WindowsEventLogProject() {
                 className="w-full h-full object-contain"
                 style={{ animation: "fadeIn 0.35s ease" }}
                 onError={(e) => {
-                  // fallback placeholder if image not found
                   const target = e.target as HTMLImageElement;
                   target.style.display = "none";
                   const parent = target.parentElement;
@@ -200,7 +181,6 @@ export default function WindowsEventLogProject() {
                 }}
               />
 
-              {/* Nav arrows */}
               <button
                 onClick={prev}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-white/10 flex items-center justify-center hover:border-cyan-400/50 hover:bg-cyan-500/10 transition-all"
@@ -214,13 +194,11 @@ export default function WindowsEventLogProject() {
                 <ChevronRight className="w-4 h-4 text-white" />
               </button>
 
-              {/* Counter */}
               <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs text-gray-400">
                 {current + 1} / {screenshots.length}
               </div>
             </div>
 
-            {/* Info panel */}
             <div className="p-6">
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <span className="text-white font-bold text-lg">{slide.label}</span>
@@ -234,7 +212,6 @@ export default function WindowsEventLogProject() {
               <p className="text-gray-400 text-sm leading-relaxed">{slide.description}</p>
             </div>
 
-            {/* Dot nav */}
             <div className="flex justify-center gap-2 pb-5">
               {screenshots.map((_, i) => (
                 <button
@@ -290,8 +267,6 @@ export default function WindowsEventLogProject() {
 
         {/* ── TOOLS + REPORT ROW ── */}
         <div className="grid lg:grid-cols-2 gap-6 mb-14">
-
-          {/* Tools */}
           <div className="rounded-2xl border border-white/8 p-6" style={{ background: "rgba(255,255,255,0.02)" }}>
             <h3 className="text-white font-bold mb-4 flex items-center gap-2">
               <Terminal className="w-4 h-4 text-cyan-400" />
@@ -307,7 +282,6 @@ export default function WindowsEventLogProject() {
             </div>
           </div>
 
-          {/* Report */}
           <div className="rounded-2xl border border-white/8 p-6" style={{ background: "rgba(255,255,255,0.02)" }}>
             <h3 className="text-white font-bold mb-4 flex items-center gap-2">
               <FileText className="w-4 h-4 text-cyan-400" />
