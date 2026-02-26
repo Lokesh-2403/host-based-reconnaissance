@@ -32,7 +32,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-24" style={{ backgroundColor: '#000000' }}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-4xl lg:text-5xl font-bold text-text-primary font-poppins tracking-tight">
@@ -47,12 +47,13 @@ export default function Contact() {
                 target={link.label === "Email" ? "_self" : "_blank"}
                 rel="noopener noreferrer"
                 className={`group flex items-center gap-4 
-                  bg-primary-bg/70 backdrop-blur-sm 
+                  backdrop-blur-sm 
                   rounded-2xl px-8 py-4 
                   border border-white/10 
                   transition-all duration-300 
                   hover:-translate-y-1 
                   hover:shadow-xl ${link.glow} ${link.hoverBg}`}
+                style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
               >
                 <div
                   className={`p-3 rounded-xl ${link.bg} ${link.color} transition-all duration-300`}

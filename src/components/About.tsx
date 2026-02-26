@@ -59,7 +59,7 @@ function StatCard({ value, label, suffix = "" }: { value: number; label: string;
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-300"
         style={{
-          background: hovered ? "#06b6d4" : "transparent",
+          background: hovered ? "#000000" : "transparent",
           boxShadow: hovered ? "0 0 8px #06b6d4" : "none",
         }}
       />
@@ -90,7 +90,7 @@ function StatCard({ value, label, suffix = "" }: { value: number; label: string;
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24">
+    <section id="about" className="relative py-24" style={{ backgroundColor: "#000000" }}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="max-w-4xl mx-auto">
 

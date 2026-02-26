@@ -44,7 +44,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="relative py-24 ">
+    <section id="skills" className="relative py-24" style={{ backgroundColor: '#000000' }}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-text-primary font-poppins mb-4 tracking-tight">
@@ -59,7 +59,8 @@ export default function Skills() {
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="group bg-secondary-bg/50 backdrop-blur-sm rounded-xl p-8 border border-white/8 hover:border-accent-cyan/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent-cyan/10"
+              className="group backdrop-blur-sm rounded-xl p-8 border border-white/8 hover:border-accent-cyan/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent-cyan/10"
+              style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-accent-cyan/10 rounded-lg text-accent-cyan group-hover:bg-accent-cyan group-hover:text-primary-bg transition-all duration-300">

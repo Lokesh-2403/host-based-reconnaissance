@@ -94,7 +94,7 @@ export default function Projects({ onViewHostProject, onViewWindowsProject }: Pr
   };
 
   return (
-    <section id="projects" className="py-24">
+    <section id="projects" className="py-24" style={{ backgroundColor: '#000000' }}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-text-primary font-poppins mb-4 tracking-tight">
@@ -109,7 +109,8 @@ export default function Projects({ onViewHostProject, onViewWindowsProject }: Pr
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-primary-bg/60 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-accent-cyan/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent-cyan/20"
+              className="group backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-accent-cyan/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent-cyan/20"
+              style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
             >
               <h3 className="text-2xl font-semibold text-text-primary font-poppins mb-2 group-hover:text-accent-cyan transition-colors duration-300">
                 {project.title}

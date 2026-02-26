@@ -6,6 +6,7 @@ export default function Hero() {
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: '#000000' }}
     >
       {/* Subtle Overlay for Better Readability */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>

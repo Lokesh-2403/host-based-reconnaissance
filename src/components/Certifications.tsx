@@ -27,7 +27,7 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="relative py-24 ">
+    <section id="certifications" className="relative py-24" style={{ backgroundColor: '#000000' }}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-text-primary font-poppins mb-4 tracking-tight">
@@ -42,7 +42,8 @@ export default function Certifications() {
           {learningPaths.map((path, index) => (
             <div
               key={index}
-              className="bg-secondary-bg/50 backdrop-blur-sm rounded-xl p-8 border border-white/8 hover:border-accent-cyan/50 transition-all duration-300"
+              className="backdrop-blur-sm rounded-xl p-8 border border-white/8 hover:border-accent-cyan/50 transition-all duration-300"
+              style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className={`p-2 rounded-lg ${
@@ -65,7 +66,8 @@ export default function Certifications() {
                 {path.items.map((item, itemIndex) => (
                   <li
                     key={itemIndex}
-                    className="flex items-start gap-3 p-4 bg-primary-bg/50 rounded-lg border border-white/5 hover:border-accent-cyan/30 transition-all duration-300"
+                    className="flex items-start gap-3 p-4 rounded-lg border border-white/5 hover:border-accent-cyan/30 transition-all duration-300"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
                   >
                     <Award className="w-5 h-5 text-accent-cyan flex-shrink-0 mt-0.5" />
                     <span className="text-text-secondary text-base">{item}</span>

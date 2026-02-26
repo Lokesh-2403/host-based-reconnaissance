@@ -2,7 +2,7 @@ import { Download, FileText } from 'lucide-react';
 
 export default function Resume() {
   return (
-    <section id="resume" className="relative py-24 ">
+    <section id="resume" className="relative py-24" style={{ backgroundColor: '#000000' }}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-8">
