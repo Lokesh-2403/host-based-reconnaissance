@@ -267,7 +267,10 @@
 
 <!-- Black fade overlay — covers everything during redirect -->
 <div id="fade-overlay"></div>
-
+<!-- Preload portfolio assets silently in background -->
+<link rel="prefetch" href="https://lokeshbabu.vercel.app/?loaded=1" />
+<link rel="preconnect" href="https://lokeshbabu.vercel.app" />
+<iframe id="preload-frame" src="https://lokeshbabu.vercel.app/?loaded=1" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;z-index:-1;" tabindex="-1" aria-hidden="true"></iframe>
 <!-- Matrix rain -->
 <canvas id="matrix-canvas"></canvas>
 
