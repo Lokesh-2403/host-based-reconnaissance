@@ -313,7 +313,7 @@
         const d = document.createElement('div');
         d.className = 'tick'; ticksEl.appendChild(d);
       }
-      const duration  = 2800;
+      const duration  = 4000;
       const startTime = performance.now() + 600;
       function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
       function tickProgress(now) {
