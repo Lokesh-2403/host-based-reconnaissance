@@ -236,8 +236,6 @@
     /* ══════════════════════════════════════
        ZOOM TRANSITION
     ══════════════════════════════════════ */
-
-    /* Stage zooms IN — expands hugely and fades out */
     #stage.zoom-in {
       animation: stageZoomIn 1s cubic-bezier(.4,0,1,1) forwards;
     }
@@ -423,11 +421,14 @@ requestAnimationFrame(tickProgress);
 function triggerTransition() {
   const stage = document.getElementById('stage');
 
-  // Zoom the loading page IN (expands & fades)
+  // Set the flag HERE before redirecting
+  // So when main.tsx runs on the portfolio, it sees this and skips the loader redirect
+  sessionStorage.setItem('hasSeenLoader', 'true');
+
+  // Zoom the loading page IN
   stage.classList.add('zoom-in');
 
-  // After zoom animation completes → hard redirect to portfolio
-  // Portfolio opens fresh — full scrolling, full interactivity
+  // After zoom finishes → redirect to portfolio
   setTimeout(() => {
     window.location.replace('https://lokeshbabu.vercel.app');
   }, 950);
