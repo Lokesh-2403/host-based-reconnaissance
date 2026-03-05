@@ -24,6 +24,12 @@ export default async function handler(req: Request) {
   try {
     const body = await req.json();
 
+    // Override model to ensure correct model string
+    const requestBody = {
+      ...body,
+      model: "claude-3-5-sonnet-20241022",
+    };
+
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -31,7 +37,7 @@ export default async function handler(req: Request) {
         "x-api-key": process.env.ANTHROPIC_API_KEY ?? "",
         "anthropic-version": "2023-06-01",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(requestBody),
     });
 
     const data = await response.json();
