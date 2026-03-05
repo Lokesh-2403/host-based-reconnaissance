@@ -14,22 +14,9 @@ export default async function handler(req: Request) {
     });
   }
 
-  if (req.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
   try {
     const text = await req.text();
-
-    if (!text) {
-      return new Response(JSON.stringify({ error: "Empty body" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
+    console.log("Body received:", text.slice(0, 100));
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -42,6 +29,7 @@ export default async function handler(req: Request) {
     });
 
     const data = await response.text();
+    console.log("Anthropic response status:", response.status);
 
     return new Response(data, {
       status: response.status,
