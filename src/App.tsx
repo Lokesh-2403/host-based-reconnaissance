@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
@@ -11,7 +12,7 @@ import Footer from "./components/Footer";
 import CyberCursor from './components/CyberCursor';
 import HostBasedProject from "./pages/HostBasedProject";
 import WindowsEventLogProject from "./pages/WindowsEventLogProject";
-
+import AIChat from "./components/AIChat";
 
 function App() {
   const [activePage, setActivePage] = useState<"home" | "host" | "windows">("home");
@@ -69,7 +70,7 @@ function App() {
         )}
 
       </div>
-
+     <AIChat />
       
     </div>
   );
