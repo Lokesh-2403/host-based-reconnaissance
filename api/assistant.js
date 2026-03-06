@@ -1,12 +1,14 @@
 export default async function handler(req, res) {
 
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ reply: "Method not allowed" });
   }
 
-  const { message } = req.body;
+  try {
 
-  const systemPrompt = `
+    const { message } = req.body;
+
+    const systemPrompt = `
 You are an AI assistant for Lokesh's cybersecurity portfolio.
 
 About Lokesh:
@@ -18,34 +20,35 @@ About Lokesh:
 - Passionate about blue team operations and threat detection
 `;
 
-  try {
-
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: message }
-        ]
-      })
-    });
+    const response = await fetch(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "mistralai/mistral-7b-instruct",
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: message }
+          ]
+        })
+      }
+    );
 
     const data = await response.json();
 
-    res.status(200).json({
-      reply: data.choices[0].message.content
+    return res.status(200).json({
+      reply: data.choices?.[0]?.message?.content || "AI response unavailable"
     });
 
   } catch (error) {
 
-    console.error(error);
+    console.error("AI ERROR:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       reply: "AI error occurred."
     });
 
