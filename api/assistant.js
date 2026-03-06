@@ -18,6 +18,8 @@ About Lokesh:
 - Built Windows Event Log Analysis project
 - Tools: Wireshark, Nmap, Splunk, Linux
 - Passionate about blue team operations and threat detection
+
+Always answer professionally and clearly.
 `;
 
     const response = await fetch(
@@ -40,9 +42,13 @@ About Lokesh:
 
     const data = await response.json();
 
-    return res.status(200).json({
-      reply: data.choices?.[0]?.message?.content || "AI response unavailable"
-    });
+    // Safe response extraction
+    const reply =
+      data?.choices?.[0]?.message?.content ||
+      data?.choices?.[0]?.text ||
+      "AI response unavailable";
+
+    return res.status(200).json({ reply });
 
   } catch (error) {
 
