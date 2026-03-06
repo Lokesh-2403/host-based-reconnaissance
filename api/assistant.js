@@ -1,16 +1,12 @@
-import OpenAI from "openai";
-
 export default async function handler(req, res) {
 
-  try {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
+  const { message } = req.body;
 
-    const { message } = req.body;
-
-    const systemPrompt = `
+  const systemPrompt = `
 You are an AI assistant for Lokesh's cybersecurity portfolio.
 
 About Lokesh:
@@ -20,20 +16,29 @@ About Lokesh:
 - Built Windows Event Log Analysis project
 - Tools: Wireshark, Nmap, Splunk, Linux
 - Passionate about blue team operations and threat detection
-
-Answer questions professionally about Lokesh.
 `;
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: message }
-      ],
+  try {
+
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "mistralai/mistral-7b-instruct",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: message }
+        ]
+      })
     });
 
+    const data = await response.json();
+
     res.status(200).json({
-      reply: completion.choices[0].message.content
+      reply: data.choices[0].message.content
     });
 
   } catch (error) {
