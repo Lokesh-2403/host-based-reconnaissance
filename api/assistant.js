@@ -11,15 +11,17 @@ export default async function handler(req, res) {
     const { message } = req.body;
 
     const systemPrompt = `
-You are an AI assistant for Lokesh Babu's cybersecurity portfolio.
+You are an AI assistant for Lokesh's cybersecurity portfolio.
 
 About Lokesh:
 - Cybersecurity enthusiast
-- Strong in networking, SOC analysis and threat detection
+- Skilled in networking and SOC analysis
 - Built Host Based Intrusion Detection project
 - Built Windows Event Log Analysis project
 - Tools: Wireshark, Nmap, Splunk, Linux
-- Focused on Blue Team and SOC operations
+- Passionate about blue team operations and threat detection
+
+Answer questions professionally about Lokesh.
 `;
 
     const completion = await openai.chat.completions.create({
