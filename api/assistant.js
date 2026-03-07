@@ -12,27 +12,23 @@ export default async function handler(req, res) {
       return res.status(400).json({ reply: "Invalid input." });
     }
 
-    const systemPrompt = `
+    const msg = message.toLowerCase();
 
-You are an AI assistant for Lokesh Adusumalli's cybersecurity portfolio.
+    /* FORCE PROJECT LIST */
 
-STRICT RULES:
-
-- Keep answers SHORT.
-- Maximum 5 lines.
-- Never explain in paragraphs.
-- Only return bullet points when listing items.
-
-PROJECTS INFORMATION (ALWAYS RETURN THESE EXACT PROJECTS):
-
-• Host-Based Network Reconnaissance & Service Enumeration
+    if (msg.includes("project")) {
+      return res.status(200).json({
+        reply: `• Host-Based Network Reconnaissance & Service Enumeration
 • Windows Security Event Log Analysis & Threat Detection
-• Linux SSH Brute Force Detection System
+• Linux SSH Brute Force Detection System`
+      });
+    }
 
+    /* FORCE SKILLS LIST */
 
-SOC ANALYST SKILLS (RETURN ONLY THESE):
-
-• Network Traffic Analysis
+    if (msg.includes("skill")) {
+      return res.status(200).json({
+        reply: `• Network Traffic Analysis
 • SIEM Monitoring
 • Log Analysis
 • Incident Detection & Response
@@ -40,28 +36,31 @@ SOC ANALYST SKILLS (RETURN ONLY THESE):
 • Packet Analysis (Wireshark)
 • Linux Security
 • Windows Security
-• Vulnerability Assessment
+• Vulnerability Assessment`
+      });
+    }
 
+    const systemPrompt = `
 
-ABOUT LOKESH:
+You are an AI assistant for Lokesh Adusumalli's cybersecurity portfolio.
 
-Lokesh Adusumalli is a cybersecurity enthusiast focused on SOC operations, 
+Rules:
+- Keep answers SHORT
+- Maximum 5 lines
+- No long paragraphs
+
+About Lokesh:
+
+Lokesh Adusumalli is a cybersecurity enthusiast focused on SOC operations,
 threat detection, and network security monitoring.
 
-
-RESPONSE RULES:
-
-If user asks about PROJECTS → return ONLY the 3 project names.
-
-If user asks about SKILLS → return ONLY SOC analyst skills.
-
-If user asks "Who is Lokesh?" → reply:
+If asked "Who is Lokesh":
 
 Lokesh Adusumalli
 Cybersecurity Enthusiast
 Focused on SOC Analysis, Threat Detection & Network Security.
 
-If user asks about CONTACT → say:
+If asked about contact:
 
 You can contact Lokesh through the contact section of this portfolio.
 
