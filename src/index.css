@@ -51,23 +51,38 @@
 }
 
 /* Cyber scan line */
+
 .scan-line {
   position: absolute;
-  top: -20%;
+  top: 0;
   left: 0;
   width: 100%;
   height: 2px;
 
-  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  background: linear-gradient(90deg, transparent, #06b6d4, transparent);
 
-  animation: scanMove 2.2s linear infinite;
+  animation: scanMove 2s linear infinite;
 }
 
 @keyframes scanMove {
-  0% { top: -20%; opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { top: 120%; opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+
 }
 
 /* Boot text effect */

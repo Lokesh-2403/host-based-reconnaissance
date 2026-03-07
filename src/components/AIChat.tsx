@@ -8,7 +8,7 @@ const [message,setMessage] = useState("");
 const [messages,setMessages] = useState<any[]>([]);
 const [loading,setLoading] = useState(false);
 
-const chatEndRef = useRef<any>(null);
+const chatEndRef = useRef<HTMLDivElement | null>(null);
 
 useEffect(()=>{
 chatEndRef.current?.scrollIntoView({behavior:"smooth"});
@@ -17,7 +17,6 @@ chatEndRef.current?.scrollIntoView({behavior:"smooth"});
 useEffect(()=>{
 
 if(open){
-
 setBooting(true);
 
 setTimeout(()=>{
@@ -28,15 +27,25 @@ setBooting(false);
 
 },[open]);
 
-const sendMessage = async () => {
+const quickQuestions = [
+"Who is Lokesh?",
+"Show Lokesh's projects",
+"What technologies does Lokesh use?",
+"How can I contact Lokesh?"
+];
 
-if(!message.trim()) return;
+const sendMessage = async (text?:string) => {
 
-const userMessage = {role:"user",text:message};
+const msg = text || message;
+
+if(!msg.trim()) return;
+
+const userMessage = {role:"user",text:msg};
 
 setMessages(prev=>[...prev,userMessage]);
 
 setMessage("");
+
 setLoading(true);
 
 try{
@@ -46,7 +55,7 @@ method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-body:JSON.stringify({message})
+body:JSON.stringify({message:msg})
 });
 
 const data = await response.json();
@@ -73,7 +82,7 @@ let current="";
 
 const interval=setInterval(()=>{
 
-current+=text[i];
+current += text.charAt(i);
 
 setMessages(prev=>{
 const last = prev[prev.length-1];
@@ -115,6 +124,7 @@ if(e.key==="Enter") sendMessage();
 };
 
 return(
+
 <>
 
 <style>{`
@@ -125,32 +135,48 @@ return(
 100%{transform:translateY(0px)}
 }
 
-@keyframes scan {
-0%{top:-100%}
-100%{top:100%}
-}
-
 .logo{
 animation:float 3s ease-in-out infinite;
 position:relative;
+overflow:hidden;
 }
+
+/* cyber scan line */
 
 .scanline{
 position:absolute;
+top:0;
+left:0;
 width:100%;
-height:3px;
-background:cyan;
-opacity:0.6;
-animation:scan 2.5s linear infinite;
+height:2px;
+background:linear-gradient(90deg, transparent, #06b6d4, transparent);
+opacity:0.8;
+animation:scanMove 2s linear infinite;
+}
+
+@keyframes scanMove{
+0%{
+transform:translateY(0);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+80%{
+opacity:1;
+}
+100%{
+transform:translateY(70px);
+opacity:0;
+}
 }
 
 `}</style>
 
-
 {/* Floating AI Button */}
 
 <div
-onClick={()=>setOpen(!open)}
+onClick={()=>setOpen(prev => !prev)}
 style={{
 position:"fixed",
 bottom:"25px",
@@ -162,13 +188,21 @@ zIndex:9999
 }}
 >
 
-<div className="logo">
+<div className="logo"
+style={{
+width:"70px",
+height:"70px",
+position:"relative",
+overflow:"hidden"
+}}
+>
 
 <img
 src="/ai-logo.png"
 style={{
 width:"70px",
-filter:"drop-shadow(0 0 4px rgba(0,255,255,0.4))"
+height:"70px",
+filter:"drop-shadow(0 0 6px rgba(6,182,212,0.5))"
 }}
 />
 
@@ -189,7 +223,7 @@ position:"fixed",
 bottom:"110px",
 right:"25px",
 width:"360px",
-height:"460px",
+height:"690px",
 background:"rgba(0,0,0,0.92)",
 borderRadius:"18px",
 border:"1px solid rgba(0,255,255,0.4)",
@@ -255,6 +289,45 @@ gap:"6px"
 ) : (
 
 <>
+
+{/* Suggested Questions */}
+
+{messages.length===0 && (
+
+<div
+style={{
+padding:"12px",
+display:"flex",
+flexWrap:"wrap",
+gap:"8px",
+borderBottom:"1px solid rgba(6,182,212,0.25)"
+}}
+>
+
+{quickQuestions.map((q,index)=>(
+
+<button
+key={index}
+onClick={()=>sendMessage(q)}
+style={{
+background:"#020617",
+color:"#22d3ee",
+border:"1px solid rgba(6,182,212,0.4)",
+borderRadius:"20px",
+padding:"6px 12px",
+fontSize:"12px",
+cursor:"pointer"
+}}
+>
+{q}
+</button>
+
+))}
+
+</div>
+
+)}
+
 
 {/* Messages */}
 
@@ -322,8 +395,9 @@ Analyzing...
 
 <div
 style={{
-display:"flex",
-borderTop:"1px solid rgba(0,255,255,0.3)"
+position:"relative",
+padding:"10px",
+borderTop:"1px solid rgba(6,182,212,0.3)"
 }}
 >
 
@@ -333,24 +407,36 @@ onChange={(e)=>setMessage(e.target.value)}
 onKeyDown={handleKeyPress}
 placeholder="Ask about Lokesh..."
 style={{
-flex:1,
-padding:"12px",
-background:"transparent",
+width:"100%",
+padding:"12px 45px 12px 16px",
+background:"#020617",
 color:"white",
-border:"none",
-outline:"none"
+border:"1px solid rgba(6,182,212,0.35)",
+borderRadius:"30px",
+outline:"none",
+fontSize:"14px"
 }}
 />
 
 <button
-onClick={sendMessage}
+onClick={()=>sendMessage()}
 style={{
-padding:"0 16px",
+position:"absolute",
+right:"16px",
+top:"50%",
+transform:"translateY(-50%)",
+width:"34px",
+height:"34px",
+borderRadius:"50%",
 background:"#06b6d4",
 border:"none",
 cursor:"pointer",
 color:"white",
-fontSize:"18px"
+fontSize:"16px",
+display:"flex",
+alignItems:"center",
+justifyContent:"center",
+boxShadow:"0 0 8px rgba(6,182,212,0.6)"
 }}
 >
 ➤
@@ -367,6 +453,7 @@ fontSize:"18px"
 )}
 
 </>
+
 );
 
 }
